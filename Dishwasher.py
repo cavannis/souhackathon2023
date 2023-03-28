@@ -1,24 +1,6 @@
-from DndInterface import Job
+class dishwasher:
+    def __init__(self):
+        self.weapons = "Skillet, rolling pin, cutting_board"
 
-class Dishwasher(Job):
-
-    def getSkillModifier(self):
-        """dishwasher skillmodifier return function. 
-        The dishwasher job gives a +5 to all pans"""
-        PanModifier = 5
-        
-
-        return PanModifier
-    def combatMod(self):
-        """dishwasher combat mod return function.
-        Returns a +1 to melee attacks """
-        MeleeBonus = 1
-
-        return MeleeBonus
-
-    def levelBonuses(self):
-        self = self + 1
-        """dishwasher level bonus return function.
-        each level increases the level of self by one"""
-
-        return self
+    def getweapons(self):
+        return self.weapons
