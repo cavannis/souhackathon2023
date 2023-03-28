@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class GUI(tk.Tk):
-    def __init__(self):
+    def __init__(self, options):
         super().__init__()
         self.title("Options")
         self.geometry("300x200")
@@ -9,9 +9,6 @@ class GUI(tk.Tk):
         # create a label
         label = tk.Label(self, text="Select an option:")
         label.pack(pady=10)
-
-        # create a list of options
-        options = ["DishWasher", "Thief", "Dog Walker", "Crazed Homless Man", "Swordsman", "Muffin Man"]
 
         # create a radio button for each option
         self.selected_option = tk.StringVar()
@@ -24,9 +21,8 @@ class GUI(tk.Tk):
         submit_button.pack(pady=10)
 
     def submit_selection(self):
-        selected = self.selected_option.get()
-        print(f"Selected option: {selected}")
+        self.selected = self.selected_option.get()
+        self.destroy()
 
-# create and run the GUI
-gui = GUI()
-gui.mainloop()
+    def get_selected_option(self):
+        return self.selected
