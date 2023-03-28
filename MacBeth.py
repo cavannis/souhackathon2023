@@ -6,7 +6,7 @@ print("choose what career/job Macbeth has started with in his Journey to become 
 
 print("Macbeths possible career options are as follows: Dishwasher, thief, Swordsman, Dog walker, Muffin man, and crazed homeless man")
 
-gui = GUI([ "Thief" , "Muffin man" , "Swordsman", "Dog walker", "Crazed Homless Man", "Dishwasher"]) # creates the gui where you select your class.
+gui = GUI([ "Thief" , "Muffin Man" , "Swordsman", "Dog walker", "Crazed Homless Man", "Dishwasher"]) # creates the gui where you select your class.
 
 gui.mainloop() # run the GUI main loop
 
@@ -31,6 +31,21 @@ if Classchoice == "Thief":
     Weapon_choice = gui.get_selected_option()
     
     print("You selected :", Weapon_choice)
+
+if Classchoice == "Muffin Man":
+    print("muffin")
+
+if Classchoice == "Swordsman":
+    print("swing")
+    
+if Classchoice == "Dishwasher":
+    print("wish wash")
+    
+if Classchoice == "Crazed Homeless Man":
+    print("REE")
+    
+if Classchoice == "Dog Walker":
+    print("bark")
     
     
     
