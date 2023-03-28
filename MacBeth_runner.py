@@ -7,10 +7,18 @@ from Crazedhomelessman import crazedhomelessman
 from Swordsman import swordsman
 from Textinputgui import TextInputGUI
 from Slowprint import Slowprinter
-slow_printer = Slowprinter(delay=0.05)
+
+from collections import deque
+
+# create a stack to keep track of the user's previous choices
+choice_stack = deque()
+
+slow_printer = Slowprinter(delay=0.00) # creates a slowest text speed
+
+
 slow_printer.slow_print("Welcome to your exotic Macbeth experience. You will choose how Macbeth starts along his journey and will be able to make unique choices along the journey") 
 
-slow_printer.slow_print("choose what career/job Macbeth has started with in his Journey to become king of scotland. This will affect how easy or hard certain events are")
+slow_printer.slow_print("choose what career, job, and name Macbeth has started with in his Journey to become king of scotland. This will affect how easy or hard certain events are")
 
 slow_printer.slow_print("Macbeths possible career options are as follows: Dishwasher, thief, Swordsman, Dog walker, Muffin man, and crazed homeless man")
 
@@ -25,98 +33,34 @@ slow_printer.slow_print("you have selected: " + Classchoice )
 slow_printer.slow_print("now that you selected your class, it's time to select your weapon!")
 
 if Classchoice == "Thief":
-    
     T = thief()
-    
-    weapons = T.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
+elif Classchoice == "Muffin Man":
+    T = muffinman()
+elif Classchoice == "Swordsman":
+    T = swordsman()
+elif Classchoice == "Dishwasher":
+    T = dishwasher()
+elif Classchoice == "Crazed Homeless Man":
+    T = crazedhomelessman()
+elif Classchoice == "Dog walker":
+    T = dogwalker()
 
-if Classchoice == "Muffin Man":
-    mm = muffinman()
-    
-    weapons = T.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
+weapons = T.getweapons() 
+weapons_list = [weapon.strip() for weapon in weapons.split(",")]
 
-if Classchoice == "Swordsman":
-    sw = swordsman()
-    
-    weapons = sw.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
-    
-if Classchoice == "Dishwasher":
-    dish = dishwasher()
-    
-    weapons = dish.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
-    
-if Classchoice == "Crazed Homeless Man":
-    chm = crazedhomelessman()
-    
-    weapons = chm.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
-    
-if Classchoice == "Dog Walker":
-    dw = dogwalker()
-    
-    weapons = dw.getweapons()
-    
-    weapons_list = [weapon.strip() for weapon in weapons.split(",")]
-    
-    options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
-    
-    gui = GUI(options)
-    gui.mainloop()
-    Weapon_choice = gui.get_selected_option()
-    
-    slow_printer.slow_print("You selected :" + Weapon_choice)
-    
+options = [f'{weapon_word.strip()}' for weapon in weapons_list for weapon_word in weapon.split()]
 
+gui = GUI(options, previous_gui=gui) # Add the previous_gui argument to create the back button
+gui.mainloop()
+
+Weapon_choice = gui.get_selected_option()
+choice_stack.appendleft(("weapon", Weapon_choice))
+print("You selected:" + Weapon_choice)
+    
+slow_printer.slow_print("now to select your name!")
 text_input_gui = TextInputGUI("now to select your name!")
 name = text_input_gui.get_input()
-slow_printer.slow_print("wecome: " + name + " you are a: " + Classchoice + " with the weapon: " + Weapon_choice)
+slow_printer.slow_print("wecome: " + name + " you are a: " + Classchoice + " with a weapon choice of " + Weapon_choice)
+choice_stack.appendleft(("name", name))
 
+slow_printer.slow_print(name + " You are locked in a cell and")
