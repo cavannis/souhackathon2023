@@ -10,19 +10,20 @@ class GUI(tk.Tk):
         label = tk.Label(self, text="Select an option:")
         label.pack(pady=10)
 
-        # create a radio button for each option
-        self.selected_option = tk.StringVar()
+        # create a listbox with all the options
+        self.listbox = tk.Listbox(self, selectmode=tk.SINGLE, height=len(options))
         for option in options:
-            rb = tk.Radiobutton(self, text=option, variable=self.selected_option, value=option)
-            rb.pack()
+            self.listbox.insert(tk.END, option)
+        self.listbox.pack(fill=tk.BOTH, expand=True)
 
         # create a button to submit the selection
         submit_button = tk.Button(self, text="Submit", command=self.submit_selection)
         submit_button.pack(pady=10)
 
     def submit_selection(self):
-        self.selected = self.selected_option.get()
+        self.selected = self.listbox.get(self.listbox.curselection())
         self.destroy()
 
     def get_selected_option(self):
         return self.selected
+
